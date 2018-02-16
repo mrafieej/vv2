@@ -1,0 +1,32 @@
+{% extends 'listing/base.html' %}
+{% block title %}Inbox{% endblock %}
+{% block messages_active %}active{% endblock %}
+
+{% block body %}
+<div class="albums-container container-fluid">
+
+     <div class="row">
+
+        <div class="col-sm-1 col-md-1"></div>
+
+        <div class="col-xs-12 col-sm-10 col-md-10" style="padding-top:30px;">
+            <div class="panel panel-default" style="min-height:600px;">
+                <div class="panel-body">
+                    <div>
+                        <h3>Inbox:</h3>
+                    </div> <br/>
+                    {% if True %}
+                    <div style="text-align:center;margin:120px;">
+                        <h4>You don't have any messages yet!</h4>
+                    </div>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-1 col-md-1"></div>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'listing/base.html' %}
+{% block home_active %}active{% endblock %}
+
+
+{% block body %}
+
+<div class="albums-container container-fluid">
+
+
+
+    <div class="btn-group btn-group.btn-group-justified" role="group" aria-label="..." style="padding-bottom:20px;padding-top:5px;float: right;">
+       <a href="{% url 'listing:home' 1 %}"  role="button" class="btn btn-default" style="background-color:{{btn1_background_color}};"> Lake Tahoe </a>
+       <a href="{% url 'listing:home' 2 %}"  role="button" class="btn btn-default" style="background-color:{{btn2_background_color}};"> Hawaii </a>
+       <a href="{% url 'listing:home' 3 %}"  role="button" class="btn btn-default" style="background-color:{{btn3_background_color}};"> SF Bay Area </a>
+        <a href="{% url 'listing:home' 0 %}"  role="button" class="btn btn-default" style="background-color:{{btn4_background_color}};"> All </a>
+    </div>
+
+
+    <!-- Albums -->
+    <div class="row" style="padding:70px;">
+            {% for listing in listings %}
+            <div class="col-xs-9 col-sm-6 col-md-4 col-lg-3">
+                <div class="thumbnail" style="height:340px;">
+                    <a href="{% url 'listing:listing_detail' listing.id.hex %}">
+                        <img src="{{ listing.image_1.url }}" class="img-responsive" style="height:200px;">
+                    </a>
+                    <a href="{% url 'listing:listing_detail' listing.id.hex %}">
+
+                        <div class="caption col-xs-12 col-sm-12 col-md-12">
+                            <h5 style="font-weight: bold;color:#3d3d5c;">{{ listing.title }}</h5>
+                            <!--style="display:inline;text-align: right;"-->
+
+                            <h6 style="font-weight: bold;color:#3d3d5c;display:inline;float:left;line-height: 60%;">{{ listing.city}}</h6>
+                            <h6 style="font-weight: bold;color:#3d3d5c;float:right;line-height: 60%;">{{ listing.bedrooms}}-Br/{{ listing.bathrooms}}-Ba</h6><br/>
+                            <div style="clear: both;"></div>
+                            <h6 style="color:#3d3d5c;display:inline;float:left;line-height: 60%;">{{ listing.availability_from }}-{{ listing.availability_to }}</h6>
+                            <h6 style="font-weight: bold;color:#3d3d5c;float:right;line-height: 60%;">{{ listing.points_per_night}} P/N</h6>
+                            <div style="clear: both;"></div>
+                        </div>
+
+                        <!--<div class="caption col-xs-2 col-sm-2 col-md-2">-->
+                            <!--<h6 style="font-weight: bold;color:#7575a3;">{{ listing.bedrooms}}-Br</h6>-->
+                            <!--&lt;!&ndash;<h6 style="font-weight: bold;color:#7575a3;">{{ listing.bathrooms}}-Ba</h6>&ndash;&gt;-->
+                            <!--<h6 style="font-weight: bold;color:#7575a3;">{{ listing.points_per_night}} P/N</h6>-->
+                        <!--</div>-->
+                    </a>
+                </div>
+            </div>
+            {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+
+            {% endfor %}
+    </div>
+
+</div>
+
+<!--<script>-->
+
+    <!--function setColor(btn, color) {-->
+        <!--var property1 = document.getElementById('btn1');-->
+        <!--var property2 = document.getElementById('btn2');-->
+        <!--var property3 = document.getElementById('btn3');-->
+        <!--if (btn == 'btn1') {-->
+            <!--property1.style.backgroundColor = "#4D000000"-->
+            <!--property2.style.backgroundColor = "#FFFFFF"-->
+            <!--property3.style.backgroundColor = "#FFFFFF"-->
+        <!--}-->
+        <!--else if (btn == 'btn2') {-->
+            <!--property1.style.backgroundColor = "#FFFFFF"-->
+            <!--property2.style.backgroundColor = "#4D000000"-->
+            <!--property3.style.backgroundColor = "#FFFFFF"-->
+        <!--}-->
+        <!--else {-->
+            <!--property1.style.backgroundColor = "#FFFFFF"-->
+            <!--property2.style.backgroundColor = "#FFFFFF"-->
+            <!--property3.style.backgroundColor = "#4D000000"-->
+        <!--}-->
+        <!--window.location.href = "http://stackoverflow.com";-->
+    <!--}-->
+<!--</script>-->
+
+{% endblock %}
+

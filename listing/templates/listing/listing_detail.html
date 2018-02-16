@@ -1,0 +1,146 @@
+{% extends 'listing/base.html' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-1"></div>
+
+            <div class="col-sm-12 col-md-10" style="padding-top:40px;padding-bottom:100px;">
+                <div class="panel panel-default">
+                    <div class="panel-body" style="padding:40px;">
+
+                        <div style="padding:10px;">
+                            <h3 style="display:inline;padding-right:5px;">{{ listing.title }} </h3><h4 style="display:inline;">({{ listing.city }})</h4>
+                        </div>
+
+                        <div style="padding-top:30px;">
+                            <div class="col-xs-10 col-sm-10 col-md-10">
+                                <img src="{{ listing.image_1.url }}"  id="main_pic" class="img-responsive" style="max-height:700px;padding-right:5px;">
+                            </div>
+                            <div class="col-xs-2 col-sm-2 col-md-2">
+                                <img src="{{ listing.image_1.url }}"  id="pic1" class="img-responsive portrait" style="border: red 3px solid;" onclick="setMainPic(1);">
+                                <img src="{{ listing.image_2.url }}"  id="pic2" class="img-responsive portrait" style="padding-top:10px;border:transparent 3px solid;" onclick="setMainPic(2);">
+                                <img src="{{ listing.image_3.url }}"  id="pic3" class="img-responsive portrait" style="padding-top:10px;border:transparent 3px solid;" onclick="setMainPic(3);">
+                                <img src="{{ listing.image_4.url }}"  id="pic4" class="img-responsive portrait" style="padding-top:10px;border:transparent 3px solid;" onclick="setMainPic(4);">
+                                <img src="{{ listing.image_5.url }}"  id="pic5" class="img-responsive portrait" style="padding-top:10px;border:transparent 3px solid;" onclick="setMainPic(5);">
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="col-xs-10 col-sm-10 col-md-10" style="padding-top:40px;padding-right:20px;">
+                                {{ listing.description }}
+                            </div>
+                            <div class="col-xs-2 col-sm-2 col-md-2" style="padding-top:40px;">
+                                <a href="{% url 'userprofiles:user_profile' listing.author.pk.hex %}">
+                                <div style="margin-bottom:20px;">
+                                    <img src="{{ listing.author.profile_pic.url }}"  class="img-responsive portrait" style="height:55px;width:55px;border-radius:50%;border:#3d3d5c 1px solid;display:inline;">
+                                    <h4 style="font-weight: bold;display:inline;padding-left:5px;">{{ listing.author.firstname }}</h4><br/>
+                                </div>
+                                </a>
+                                <h5 style="font-weight: bold;">{{ listing.bedrooms }}-Br/{{ listing.bathrooms }}-Bath</h5>
+                                <h5 style="font-weight: bold;">Sleeps {{ listing.sleeps }}</h5>
+                                <h5 style="font-weight: bold;">{{ listing.square_footage }}-sq.ft.</h5>
+                                <h5>Available:</h5>
+                                <h5>{{ listing.availability_from }}-{{ listing.availability_to }}</h5>
+                                {% if listing.cats_ok %}
+                                    <h5>Cats Ok</h5>
+                                {% endif%}
+                                {% if listing.dogs_ok %}
+                                    <h5>Dogs Ok</h5>
+                                {% endif%}
+                                {% if listing.smoking_ok %}
+                                    <h5>Smoking Ok</h5>
+                                {% endif%}
+                                <h5>{{ listing.points_per_night }}-Points/Night</h5>
+                                <h5>Security deposit: ${{ listing.deposit }}</h5>
+
+                                {% if not posted_by_current_user %}
+                                    <form class="form-horizontal" role="form" action="?b=001" method="get" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <div>
+                                                <button type="submit" class="btn btn-success submit-button" style="margin:10px;width:150px;">Book</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <form class="form-horizontal" role="form" action="?c=001" method="get" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <div>
+                                                <button type="submit" class="btn btn-success submit-button" style="margin:10px;width:150px;">Contact Host</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                {% else %}
+                                    <form class="form-horizontal" role="form" action="{% url 'listing:edit_listing' listing_id %}" method="get" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <div>
+                                                <button type="submit" class="btn btn-success submit-button" style="margin:10px;width:150px;">Edit Listing</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                <form class="form-horizontal" role="form" action="{% url 'listing:delete_listing' listing_id %}" method="get" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <div>
+                                                <button type="submit" class="btn btn-success submit-button" style="margin:10px;width:150px;">Delete Listing</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                {% endif %}
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        <div class="col-md-1"></div>
+    </div>
+
+<script type="text/javascript">
+    function setMainPic(index) {
+        var picUrl = "{{ listing.image_2.url}}"
+        var pic1 = document.getElementById('pic1')
+        var pic2 = document.getElementById('pic2')
+        var pic3 = document.getElementById('pic3')
+        var pic4 = document.getElementById('pic4')
+        var pic5 = document.getElementById('pic5')
+        pic1.style.borderColor = 'transparent'
+        pic2.style.borderColor = 'transparent'
+        pic3.style.borderColor = 'transparent'
+        pic4.style.borderColor = 'transparent'
+        pic5.style.borderColor = 'transparent'
+        switch (index){
+        case 1:
+            picUrl = "{{ listing.image_1.url}}"
+            pic1.style.borderColor = 'red'
+            break;
+        case 2:
+            picUrl = "{{ listing.image_2.url}}"
+            pic2.style.borderColor = 'red'
+            break;
+        case 3:
+            picUrl = "{{ listing.image_3.url}}"
+            pic3.style.borderColor = 'red'
+            break;
+        case 4:
+            picUrl = "{{ listing.image_4.url}}"
+            pic4.style.borderColor = 'red'
+            break;
+        case 5:
+            picUrl = "{{ listing.image_5.url}}"
+            pic5.style.borderColor = 'red'
+            break;
+        default:
+            picUrl = "{{ listing.image_1.url}}"
+            pic1.style.borderColor = 'red'
+        }
+       document.getElementById('main_pic').src = picUrl;
+    }
+</script>
+
+
+{% endblock %}

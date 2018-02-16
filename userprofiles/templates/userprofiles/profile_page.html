@@ -1,0 +1,80 @@
+{% extends 'listing/base.html' %}
+{% block title %}Profile{% endblock %}
+{% block account_active %}active{% endblock %}
+
+{% block body %}
+<div class="container-fluid" >
+
+    <div class="row">
+        <!--<div class="col-xs-1 col-sm-1 col-md-2"></div>-->
+
+        <div class="col-xs-12 col-sm-10 col-md-7 col-lg-5" style="">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <div class="col-xs-4 col-sm-4 col-md-4" style="">
+                        <img src="{{ object.profile_pic.url }}" class="img-responsive" style="max-height:160px;max-width:160px;">
+                    </div>
+                    <div class="col-xs-8 col-sm-8 col-md-8" style="">
+                        <h4 style="display:inline;">{{ object.firstname }} </h4><h4 style="display:inline;">{{ object.lastname }}</h4>
+                        {% if is_own_profile %}
+                        <a href=" {% url 'userprofiles:edit_profile' user_pk %}" style="display:inline;float:right;">Edit Profile</a>
+                        {% endif %}
+                        <h5>{{ object.occupation }} </h5>
+                        <h5>{{ object.location }} </h5>
+                        <h6>{{ object.about }} </h6>
+                        <br/>
+                        {% if is_own_profile %}
+                        <h5>{{ object.points }} points</h5>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+
+            <div>
+                <div class="col-xs-12 col-sm-12 col-md-12" style="padding-top:20px;">
+                    {% for listing in object.listing_set.all %}
+
+                    <div class="col-xs-8 col-sm-5 col-md-4 col-lg-3">
+                        <div class="thumbnail" style="height:340px;">
+                            <a href="{% url 'listing:listing_detail' listing.id.hex %}">
+                                <img src="{{ listing.image_1.url }}" class="img-responsive" style="height:200px;">
+                            </a>
+                            <a href="{% url 'listing:listing_detail' listing.id.hex %}">
+
+                                <div class="caption col-xs-12 col-sm-12 col-md-12">
+                                    <h5 style="font-weight: bold;color:#3d3d5c;">{{ listing.title }}</h5>
+                                    <!--style="display:inline;text-align: right;"-->
+
+                                    <h6 style="font-weight: bold;color:#3d3d5c;display:inline;float:left;line-height: 60%;">{{ listing.city}}</h6>
+                                    <h6 style="font-weight: bold;color:#3d3d5c;float:right;line-height: 60%;">{{ listing.bedrooms}}-Br/{{ listing.bathrooms}}-Ba</h6><br/>
+                                    <div style="clear: both;"></div>
+                                    <h6 style="color:#3d3d5c;display:inline;float:left;line-height: 60%;">{{ listing.availability_from }}-{{ listing.availability_to }}</h6>
+                                    <h6 style="font-weight: bold;color:#3d3d5c;float:right;line-height: 60%;">{{ listing.points_per_night}} P/N</h6>
+                                    <div style="clear: both;"></div>
+                                </div>
+
+                                <!--<div class="caption col-xs-2 col-sm-2 col-md-2">-->
+                                    <!--<h6 style="font-weight: bold;color:#7575a3;">{{ listing.bedrooms}}-Br</h6>-->
+                                    <!--&lt;!&ndash;<h6 style="font-weight: bold;color:#7575a3;">{{ listing.bathrooms}}-Ba</h6>&ndash;&gt;-->
+                                    <!--<h6 style="font-weight: bold;color:#7575a3;">{{ listing.points_per_night}} P/N</h6>-->
+                                <!--</div>-->
+                            </a>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+
+
+    </div>
+
+</div>
+
+{% endblock %}
+

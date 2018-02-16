@@ -1,0 +1,40 @@
+{% extends 'listing/base.html' %}
+{% block title %}Inbox{% endblock %}
+{% block messages_active %}active{% endblock %}
+
+{% block body %}
+<div class="albums-container container-fluid">
+
+     <div class="row">
+
+        <div class="col-sm-2 col-md-3"></div>
+
+        <div class="col-xs-12 col-sm-8 col-md-6" style="padding-top:150px;">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <h4 style="display:inline;">Please confirm you want to delete the following listing. </h4>(This action will not be reversible.)
+                        <br/>
+                        <br/>
+                            <div>
+                                <input type="hidden" value="{{ item.id }}" name="itemsToDelete" />
+                                <a href="{{ object.get_absolute_url }}"><h4>{{ object.title }}</h4></a>
+                            </div>
+                        <br/>
+                        <div class="form-group" style="margin:10px;float:right;">
+                            <input type="submit" class="btn btn-success submit-button" value="Cancel" name="cancel"/>
+                            <input type="submit" class="btn btn-success submit-button" value="Confirm deletion" name="confirm_delete" />
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-2 col-md-3"></div>
+    </div>
+
+</div>
+{% endblock %}
