@@ -8,7 +8,7 @@
 
 
 
-    <div class="btn-group btn-group.btn-group-justified" role="group" aria-label="..." style="padding-bottom:20px;padding-top:5px;float: right;">
+    <div class="btn-group btn-group.btn-group-justified" role="group" aria-label="..." style="padding-right:70px;padding-bottom:20px;padding-top:10px;float: right;">
        <a href="{% url 'listing:home' 1 %}"  role="button" class="btn btn-default" style="background-color:{{btn1_background_color}};"> Lake Tahoe </a>
        <a href="{% url 'listing:home' 2 %}"  role="button" class="btn btn-default" style="background-color:{{btn2_background_color}};"> Hawaii </a>
        <a href="{% url 'listing:home' 3 %}"  role="button" class="btn btn-default" style="background-color:{{btn3_background_color}};"> SF Bay Area </a>
@@ -34,7 +34,8 @@
                             <h6 style="font-weight: bold;color:#3d3d5c;float:right;line-height: 60%;">{{ listing.bedrooms}}-Br/{{ listing.bathrooms}}-Ba</h6><br/>
                             <div style="clear: both;"></div>
                             <h6 style="color:#3d3d5c;display:inline;float:left;line-height: 60%;">{{ listing.availability_from }}-{{ listing.availability_to }}</h6>
-                            <h6 style="font-weight: bold;color:#3d3d5c;float:right;line-height: 60%;">{{ listing.points_per_night}} P/N</h6>
+                            <!--<h6 style="font-weight: bold;color:#3d3d5c;float:right;line-height: 60%;">{{ listing.points_per_night}} P/N</h6>-->
+                            <h6 style="font-weight: bold;color:#3d3d5c;float:right;line-height: 60%;">{{ listing.square_footage }} sq.ft.</h6>
                             <div style="clear: both;"></div>
                         </div>
 

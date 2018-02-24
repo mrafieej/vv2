@@ -13,7 +13,7 @@ class UserProfile(models.Model):
     location = models.CharField(max_length=100, default=None)
     occupation = models.CharField(max_length=100, default=None)
     about = models.TextField(max_length=1000, default=None)
-    profile_pic = models.ImageField(upload_to='media/profile_pics/', default=None)
+    profile_pic = models.ImageField(upload_to='media/profile_pics/', default='', null=True, blank=True)
     points = models.IntegerField(default=None)
     last_logged = models.DateTimeField(default=None)
     joined = models.DateTimeField(default=None)

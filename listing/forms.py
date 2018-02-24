@@ -20,13 +20,18 @@ class ListingForm(forms.ModelForm):
     smoking_ok = forms.BooleanField(required=False, label='Smoking Ok')
     availability_from = forms.DateField(initial=datetime.date.today, label='Available From')
     availability_to = forms.DateField(initial=datetime.date.today() + datetime.timedelta(days=30), label='Available Until')
-    points_per_night = forms.IntegerField(label='Points/Night')
-    deposit = forms.IntegerField(label='Security Deposit')
+    # points_per_night = forms.IntegerField(label='Points/Night')
+    # deposit = forms.IntegerField(label='Security Deposit')
     image_1 = forms.ImageField(required=True)
-    image_2 = forms.ImageField(required=False)
-    image_3 = forms.ImageField(required=False)
-    image_4 = forms.ImageField(required=False)
-    image_5 = forms.ImageField(required=False)
+    image_2 = forms.ImageField(required=True)
+    image_3 = forms.ImageField(required=True)
+    image_4 = forms.ImageField(required=True)
+    image_5 = forms.ImageField(required=True)
+    # image_6 = forms.ImageField(required=False)
+    # image_7 = forms.ImageField(required=False)
+    # image_8 = forms.ImageField(required=False)
+    # image_9 = forms.ImageField(required=False)
+    # image_10 = forms.ImageField(required=False)
     required_css_class = 'required'
 
     class Meta:
@@ -34,7 +39,8 @@ class ListingForm(forms.ModelForm):
         fields = ['title', 'location', 'description', 'bedrooms', 'bathrooms',
                   'capacity', 'square_footage', 'street', 'city', 'zip_code',
                   'cats_ok','dogs_ok', 'smoking_ok', 'availability_from', 'availability_to',
-                  'points_per_night', 'deposit', 'image_1', 'image_2', 'image_3', 'image_4', 'image_5']
+                  'image_1', 'image_2', 'image_3', 'image_4',
+                  'image_5']
 
 
 

@@ -96,6 +96,11 @@ def create_listing(request):
             listing.image_3 = request.FILES['image_3']
             listing.image_4 = request.FILES['image_4']
             listing.image_5 = request.FILES['image_5']
+            listing.image_6 = request.FILES['image_6']
+            listing.image_7 = request.FILES['image_7']
+            listing.image_8 = request.FILES['image_8']
+            listing.image_9 = request.FILES['image_9']
+            listing.image_10 = request.FILES['image_10']
             file_type = listing.image_1.url.split('.')[-1]
             file_type = file_type.lower()
             listing.pub_date = datetime.datetime.now()
@@ -169,3 +174,8 @@ class DeleteListingView(DeleteView):
             return self.get(self, *args, **kwargs)
 
 
+def beta(request):
+    if request.method == "POST":
+        if request.POST['pin'] == 'ND18':
+            return HttpResponseRedirect('/0')
+    return render(request, 'listing/beta_page.html', {})

@@ -7,25 +7,75 @@
 
      <div class="row">
 
-        <div class="col-sm-1 col-md-1"></div>
+        <div class="col-sm-2 col-md-2 col-lg-2"></div>
 
-        <div class="col-xs-12 col-sm-10 col-md-10" style="padding-top:30px;">
+        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8" style="padding-top:30px;">
             <div class="panel panel-default" style="min-height:600px;">
-                <div class="panel-body">
-                    <div>
+                <div class="panel-body" style="padding-left:0px;padding-right:0px">
+                    <div style="padding-left:10px;padding-right:10px;">
                         <h3>Inbox:</h3>
-                    </div> <br/>
-                    {% if True %}
-                    <div style="text-align:center;margin:120px;">
-                        <h4>You don't have any messages yet!</h4>
                     </div>
-                    {% endif %}
+                    <hr/>
+                    {% for message in object_list %}
+
+                    <!--<a href="{% url 'usermessages:message_detail' message.receiver.pk.hex message.listing.pk.hex %}">-->
+                        <!--<div style="padding-left:10px;padding-right:10px;">-->
+                            <!--<img src="{{ message.other.profile_pic.url }}" class="img-responsive portrait" style="height:40px;width:40px;border-radius:50%;border:#9494b8 1px solid;display:inline;margin-left:5px;margin-right:5px;">-->
+                            <!--<div style="display:inline;width:400px;">-->
+                                <!--<h5 style="display:inline;">{{ message.other.firstname }} {{ message.other.lastname }}&#45;&#45;</h5>-->
+                                <!--{{ message.body }}-->
+                                <!--<h7 style="display:inline;font-size:x-small;text-align:right;">{{ message.message_date }}</h7>-->
+                            <!--</div>-->
+                            <!--&lt;!&ndash;<div style="display:inline;font-size:small;float:right;">&ndash;&gt;-->
+                                <!--&lt;!&ndash;{{ message.message_date }}&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+                        <!--</div>-->
+                    <!--</a>-->
+
+
+                    {% if message.sender.pk.hex == user_id_self %}
+                    <a href="{% url 'usermessages:message_detail' message.receiver.pk.hex message.listing.pk.hex %}">
+                        <div style="padding-left:10px;padding-right:10px;">
+                            <img src="{{ message.receiver.profile_pic.url }}" class="img-responsive portrait" style="height:40px;width:40px;border-radius:50%;border:#9494b8 1px solid;display:inline;margin-left:5px;margin-right:5px;">
+                            <div style="display:inline;min-width:400px;">
+                                <h4 style="display:inline;width:200px;"> {{ message.receiver.firstname }} {{ message.receiver.lastname|slice:":1" }}. </h4>
+                                <h7 style="display:inline;">  {{ message.body|slice:":100" }} </h7>
+                                <h7 style="display:inline;font-size:x-small;text-align:right;"> {{ message.message_date }} </h7>
+                            </div>
+                        </div>
+                    </a>
+                    {% else %}
+                    <a href="{% url 'usermessages:message_detail' message.receiver.pk.hex message.listing.pk.hex %}">
+                        <div style="padding-left:10px;padding-right:10px;">
+                            <img src="{{ message.sender.profile_pic.url }}" class="img-responsive portrait" style="height:40px;width:40px;border-radius:50%;border:#9494b8 1px solid;display:inline;margin-left:5px;margin-right:5px;">
+                            <div style="display:inline;min-width:400px;">
+                                <h4 style="display:inline;width:200px;"> {{ message.sender.firstname }} {{ message.sender.lastname|slice:":1" }}. </h4>
+                                <h7 style="display:inline;">  {{ message.body|slice:":100" }} </h7>
+                                <h7 style="display:inline;font-size:x-small;text-align:right;"> {{ message.message_date }} </h7>
+                            </div>
+                        </div>
+                    </a>
+                    {%endif %}
+                    <hr/>
+
+                    {% empty %}
+                         <div style="text-align:center;margin:120px;">
+                            <h4>You don't have any messages yet!</h4>
+                        </div>
+                    {% endfor %}
+
+
+                        <!--<div style="text-align:center;margin:120px;">-->
+                            <!--<h4>You don't have any messages yet!</h4>-->
+                        <!--</div>-->
+
 
                 </div>
             </div>
         </div>
 
-        <div class="col-sm-1 col-md-1"></div>
+        <div class="col-sm-2 col-md-2 col-lg-2"></div>
     </div>
 
 </div>

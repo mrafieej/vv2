@@ -38,7 +38,7 @@
                                 </div>
                                 </a>
                                 <h5 style="font-weight: bold;">{{ listing.bedrooms }}-Br/{{ listing.bathrooms }}-Bath</h5>
-                                <h5 style="font-weight: bold;">Sleeps {{ listing.sleeps }}</h5>
+                                <h5 style="font-weight: bold;">Sleeps {{ listing.capacity }}</h5>
                                 <h5 style="font-weight: bold;">{{ listing.square_footage }}-sq.ft.</h5>
                                 <h5>Available:</h5>
                                 <h5>{{ listing.availability_from }}-{{ listing.availability_to }}</h5>
@@ -51,26 +51,37 @@
                                 {% if listing.smoking_ok %}
                                     <h5>Smoking Ok</h5>
                                 {% endif%}
-                                <h5>{{ listing.points_per_night }}-Points/Night</h5>
-                                <h5>Security deposit: ${{ listing.deposit }}</h5>
+                                <!--<h5>{{ listing.points_per_night }}-Points/Night</h5>-->
+                                <!--<h5>Security deposit: ${{ listing.deposit }}</h5>-->
 
                                 {% if not posted_by_current_user %}
-                                    <form class="form-horizontal" role="form" action="?b=001" method="get" enctype="multipart/form-data">
+                                    <!--<form class="form-horizontal" role="form" action="?b=001" method="get" enctype="multipart/form-data">-->
+                                        <!--{% csrf_token %}-->
+                                        <!--<div class="form-group">-->
+                                            <!--<div>-->
+                                                <!--<button type="submit" class="btn btn-success submit-button" style="margin:10px;width:150px;">Book</button>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</form>-->
+                                {% if loggedin %}
+                                    <form class="form-horizontal" role="form" action="{% url 'usermessages:message_detail' listing.author.pk.hex listing_id %}" method="get" enctype="multipart/form-data">
                                         {% csrf_token %}
                                         <div class="form-group">
                                             <div>
-                                                <button type="submit" class="btn btn-success submit-button" style="margin:10px;width:150px;">Book</button>
+                                                <button type="submit" class="btn btn-success submit-button" style="margin:10px;width:150px;">Message</button>
                                             </div>
                                         </div>
                                     </form>
-                                    <form class="form-horizontal" role="form" action="?c=001" method="get" enctype="multipart/form-data">
+                                {% else %}
+                                    <form class="form-horizontal" role="form" action="{% url 'userprofiles:login_user' %}" method="get" enctype="multipart/form-data">
                                         {% csrf_token %}
                                         <div class="form-group">
                                             <div>
-                                                <button type="submit" class="btn btn-success submit-button" style="margin:10px;width:150px;">Contact Host</button>
+                                                <button type="submit" class="btn btn-success submit-button" style="margin:10px;width:150px;">Message</button>
                                             </div>
                                         </div>
                                     </form>
+                                {% endif %}
                                 {% else %}
                                     <form class="form-horizontal" role="form" action="{% url 'listing:edit_listing' listing_id %}" method="get" enctype="multipart/form-data">
                                         {% csrf_token %}

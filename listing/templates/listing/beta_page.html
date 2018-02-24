@@ -1,3 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114141656-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-114141656-1');
+    </script>
+
+
+    <meta charset="UTF-8">
+    <title>veev</title>
+    {% load staticfiles %}
+    <link rel="shortcut icon" type="image/png" href="{%  static 'favicon.ico' %}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="{% static 'listing/style.css' %}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+
+
+
+<div class="albums-container container-fluid">
+
+     <div class="row">
+
+        <div class="col-sm-1 col-md-2"></div>
+
+        <div class="col-xs-12 col-sm-10 col-md-8" style="padding-top:150px;">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <h4 style="display:inline;"> Veev is currently in closed Beta. If you have a PIN to try our closed beta, enter it below:</h4>
+                        <br/>
+                        <br/>
+                        <div class="form-group" style="margin:10px;float:right;position: relative;left: -40%;">
+                            <input type="text" class=" " value="" name="pin" placeholder="Enter PIN"/> <br/><br/>
+
+                            <input type="submit" class="btn btn-success submit-button" value="Submit" name="send" />
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-1 col-md-2"></div>
+    </div>
+
+</div>
+
+
+
+
+
 
 Hello,
 

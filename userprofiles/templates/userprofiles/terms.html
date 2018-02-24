@@ -1,0 +1,86 @@
+{% extends 'listing/base_visitor.html' %}
+{% block title %}Terms{% endblock %}
+
+{% block body %}
+<div class="albums-container container-fluid">
+
+     <div class="row">
+
+        <div class="col-sm-1 col-md-2"></div>
+
+        <div class="col-xs-12 col-sm-10 col-md-8" style="padding:40px;">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+
+                    <div style="padding:20px;">
+                        <h3>Terms of Use:</h3>
+                        By accessing or otherwise interacting with our servers,
+                        services, websites, or any associated content/postings (together,
+                        "Veev"), you agree to these Terms of Use ("TOU") (last updated Feb.
+                        2, 2018). You acknowledge and agree Veev is a private site owned and
+                        operated by Veev, Inc. If you do not agree to
+                        the TOU, you are not authorized to use Veev. We may modify the TOU at any
+                        time in our sole discretion. You are responsible for periodically
+                        checking for changes and are bound by them if you continue to use Veev.
+                                LICENSE. If you agree to the TOU and (1) are of sufficient
+                        age and capacity to use Veev and be bound by the TOU, or (2) use Veev on
+                        behalf of a business, thereby binding that business to the TOU, we
+                        grant you a limited, revocable, non-exclusive, non-assignable license
+                        to use Veev in compliance with the TOU; unlicensed use is unauthorized.
+                        You agree not to display, "frame," make derivative works, distribute,
+                        license, or sell, content from Veev, excluding postings you create. You
+                        grant us a perpetual, irrevocable, unlimited, worldwide, fully
+                        paid/sublicensable license to use, copy, display, distribute, and make
+                        derivative works from content you post.
+                        DISCLAIMER & LIABILITY. To the full extent permitted by
+                        law, Veev, and its officers, directors, employees, agents,
+                        licensors, affiliates, and successors in interest ("Veev Entities") (1)
+                        make no promises, warranties, or representations as to Veev, including
+                        its completeness, accuracy, availability, timeliness, propriety,
+                        security or reliability; (2) provide Veev on an "AS IS" and "AS
+                        AVAILABLE" basis and any risk of using Veev is assumed by you; (3)
+                        disclaim all warranties, express or implied, including as to accuracy,
+                        merchantability, fitness for a particular purpose, and
+                        non-infringement; and (4) disclaim any liability or responsibility for
+                        acts, omissions, or conduct of you or any party in connection with Veev.
+                        Veev Entities are NOT liable for any direct, indirect, consequential,
+                        incidental, special, punitive, or other losses, including lost profits,
+                        revenues, data, goodwill, etc., arising from or related to Veev, and in
+                        no event shall such liability exceed $100 or the amount you paid us in
+                        the year preceding such loss. Some jurisdictions restrict or alter
+                        these disclaimers and limits, so some may not apply to you.
+                                CLAIMS & INDEMNITY. Any claim, cause of action, demand, or
+                        dispute arising from or related to Veev ("Claims") will be governed by
+                        the internal laws of California, without regard to conflict of law
+                        provisions, except to the extent governed by US federal law. Any Claims
+                        will be exclusively resolved by courts in San Francisco, CA (except we
+                        may seek preliminary or injunctive relief anywhere). You agree to (1)
+                        submit to the personal jurisdiction of courts in San Francisco, CA; (2)
+                        indemnify and hold Veev Entities harmless from any Claims, losses,
+                        liability, or expenses (including attorneys' fees) that arise from a
+                        third party and relate to your use of Veev; and (3) be liable and
+                        responsible for any Claims we may have against your officers,
+                        directors, employees, agents, affiliates, or any other party, directly
+                        or indirectly, paid, directed or controlled by you, or acting for your
+                        benefit.
+                    </div>
+
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <br/>
+                        <div class="form-group" style="margin:10px;float:right;">
+                            <input type="submit" class="btn btn-success submit-button" value="Decline" name="decline"/>
+                            <input type="submit" class="btn btn-success submit-button" value="Accept Terms of Use" name="accept" />
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-1 col-md-2"></div>
+    </div>
+
+</div>
+{% endblock %}

@@ -7,6 +7,7 @@ class UserForm(forms.ModelForm):
     location = forms.CharField(required=False)
     occupation = forms.CharField(required=False)
     about = forms.CharField(widget=forms.Textarea, required=False)
+    profile_pic = forms.ImageField(required=True)
     required_css_class = 'required'
 
     class Meta:

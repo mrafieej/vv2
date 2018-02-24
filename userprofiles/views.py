@@ -13,6 +13,8 @@ import datetime
 from django.core.urlresolvers import reverse_lazy
 from django.template import RequestContext
 from uuid import UUID
+from django.http import HttpResponseRedirect
+
 
 def logout_user(request):
     logout(request)
@@ -56,13 +58,16 @@ def register(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
+                pic = ''
+                if 'profile_pic' in request.FILES:
+                    pic = request.FILES['profile_pic']
                 user_profile = UserProfile(user=user, email=email, password=password,
                                            firstname=form.cleaned_data['firstname'],
                                            lastname=form.cleaned_data['lastname'],
                                            location=form.cleaned_data['location'],
                                            occupation=form.cleaned_data['occupation'],
                                            about=form.cleaned_data['about'],
-                                           profile_pic=request.FILES['profile_pic'],
+                                           profile_pic=pic,
                                            points=0,
                                            last_logged=datetime.datetime.now(),
                                            joined=datetime.datetime.now())
@@ -76,6 +81,13 @@ def register(request):
     }
     return render(request, 'userprofiles/register.html', context)
 
+
+def terms(request):
+    if request.POST.get("decline"):
+        return HttpResponseRedirect(reverse_lazy('listing:home', kwargs={'filter_id': 0}))
+    elif request.POST.get("accept"):
+        return HttpResponseRedirect(reverse_lazy('userprofiles:register'))
+    return render(request, 'userprofiles/terms.html', {})
 
 # class RegisterView(FormView):
 #     form_class = UserForm

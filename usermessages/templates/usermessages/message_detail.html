@@ -1,0 +1,118 @@
+{% extends 'listing/base.html' %}
+{% block title %}Messages{% endblock %}
+{% block account_active %}active{% endblock %}
+
+{% block body %}
+<div class="container-fluid" >
+
+    <div class="row">
+        <!--<div class="col-xs-1 col-sm-1 col-md-2"></div>-->
+
+        <div class="col-xs-8 col-sm-5 col-md-4 col-lg-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <div class="col-xs-5 col-sm-3 col-md-3" style="">
+                        <img src="{{ user_other.profile_pic.url }}" class="img-responsive" style="max-height:60px;max-width:60px;">
+                    </div>
+                    <div class="col-xs-7 col-sm-9 col-md-9" style="">
+                        <h4 style="display:inline;">{{ user_other.firstname }} </h4><h4 style="display:inline;">{{ user_other.lastname }}</h4>
+                        <h5>{{ user_other.occupation }} </h5>
+                        <h5>{{ user_other.location }} </h5>
+                        <h6>{{ user_other.about }} </h6>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
+        <form action="" method="post" class="col-xs-9 col-sm-8 col-md-7 col-lg-6">
+            {% csrf_token %}
+            <div class="form-group" >
+
+                <textarea class="form-control"  rows="5" cols="170" name="body" placeholder="Enter message... "> </textarea>
+            </div>
+            
+            <div class="form-group">
+                 <input type="submit" class="btn btn-success submit-button" style="padding-left:20px;padding-right:20px;float:right;" value="Send" name="send" />
+            </div>
+        </form>
+    </div>
+
+
+    <div class="row">
+
+                <div style="padding-top:10px;">
+
+                    <div class="col-xs-8 col-sm-5 col-md-4 col-lg-3">
+                        <div class="thumbnail" style="height:340px;">
+                            <a href="{% url 'listing:listing_detail' listing.id.hex %}">
+                                <img src="{{ listing.image_1.url }}" class="img-responsive" style="height:200px;">
+                            </a>
+                            <a href="{% url 'listing:listing_detail' listing.id.hex %}">
+
+                                <div class="caption col-xs-12 col-sm-12 col-md-12">
+                                    <h5 style="font-weight: bold;color:#3d3d5c;">{{ listing.title }}</h5>
+                                    <!--style="display:inline;text-align: right;"-->
+
+                                    <h6 style="font-weight: bold;color:#3d3d5c;display:inline;float:left;line-height: 60%;">{{ listing.city}}</h6>
+                                    <h6 style="font-weight: bold;color:#3d3d5c;float:right;line-height: 60%;">{{ listing.bedrooms}}-Br/{{ listing.bathrooms}}-Ba</h6><br/>
+                                    <div style="clear: both;"></div>
+                                    <h6 style="color:#3d3d5c;display:inline;float:left;line-height: 60%;">{{ listing.availability_from }}-{{ listing.availability_to }}</h6>
+                                    <!--<h6 style="font-weight: bold;color:#3d3d5c;float:right;line-height: 60%;">{{ listing.points_per_night}} P/N</h6>-->
+                                    <h6 style="font-weight: bold;color:#3d3d5c;float:right;line-height: 60%;">{{ listing.square_footage }} sq.ft.</h6>
+                                    <div style="clear: both;"></div>
+                                </div>
+
+                            </a>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    <div class="panel panel-default col-xs-9 col-sm-8 col-md-6 col-lg-6" style="min-height:400px;padding:10px;">
+                        <div class="panel-body" style="padding:10px;">
+                            {% for message in messages %}
+                            {% if message.sender.pk == user_self.pk %}
+                            <div class="col-xs-1 col-sm-1 col-md-3 col-lg-3" style="min-height:30px;"></div>
+                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="float:right;">
+                                <img src="{{ message.sender.profile_pic.url }}"  class="img-responsive portrait" style="height:30px;width:30px;border-radius:50%;border:#9494b8 1px solid;display:inline;">
+                            </div>
+                            <div class="col-xs-10 col-sm-10 col-md-8 col-lg-8" style="padding:10px;float:right;background-color:#9494b8;min-height:30px;border-radius:15px;">
+                                {{ message.body }}
+                                <br/>
+                                <div style="display:inline;"> {{ message.sender.firstname }}, </div>
+                                <div style="font-size:x-small;display:inline;"> {{ message.message_date }} </div>
+                            </div>
+
+
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="height:10px;"></div>
+
+                            {% else %}
+                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="float:left;">
+                                <img src="{{ message.sender.profile_pic.url }}"  class="img-responsive portrait" style="height:30px;width:30px;border-radius:50%;border:#9494b8 1px solid;display:inline;">
+                            </div>
+                            <div class="col-xs-10 col-sm-10 col-md-8 col-lg-8" style="padding:10px;float:left;background-color:#f0f0f5;min-height:30px;border-radius:15px;">
+                                {{ message.body }}
+                                <br/>
+                                <div style="display:inline;"> {{ message.sender.firstname }}, </div>
+                                <div style="font-size:x-small;display:inline;"> {{ message.message_date }} </div>
+                            </div>
+                            <div class="col-xs-1 col-sm-1 col-md-3 col-lg-3" style="min-height:30px;"></div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="height:10px;"></div>
+
+                            {% endif %}
+                            {% endfor %}
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+
+    </div>
+
+</div>
+
+
+{% endblock %}
+
